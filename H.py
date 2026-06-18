@@ -32,10 +32,16 @@ os.makedirs(IROTECH_DIR, exist_ok=True, mode=0o755)
 # Environment variables with YOUR TOKEN (Railway सेटिंग्स में सेट करें)
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', "8757135077:AAGCMSst7G9cMSuNYgCjv4AbZJx6oCZ_XoM")
 OWNER_ID = int(os.environ.get('OWNER_ID', 8420590053))
-ADMIN_ID = int(os.environ.get('ADMIN_ID', 6650888707,1630422629))
+
+admin_ids_str = os.environ.get('ADMIN_ID', '6650888707,1630422629')
+ADMIN_IDS = [int(id.strip()) for id in admin_ids_str.split(',') if id.strip()]
+
 YOUR_USERNAME = os.environ.get('YOUR_USERNAME', '@SegsyToxic95')
 UPDATE_CHANNEL = os.environ.get('UPDATE_CHANNEL', 'https://t.me/+y9GTnjfuD_I2NTI1')
 
+def is_admin(user_id):
+    return user_id in ADMIN_IDS or user_id == OWNER_ID
+    
 A4F_API_URL = "https://samuraiapi.in/v1/chat/completions"
 A4F_API_KEY = "sk-NK6SS9tpWghyFJwkZLoCis1sMaF6RwQ5WF09mUoKKR0VKCm7"
 A4F_MODEL = "provider10-claude-sonnet-4-20250514(clinesp)"
